@@ -44,6 +44,17 @@ class handDetector():
 
         return lmlist
 
+    def getAllHands(self, img):
+        lmlist = []
+        if self.results.multi_hand_landmarks:
+            for hand in self.results.multi_hand_landmarks:
+                for id, lms in enumerate(hand.landmark):
+                    h, w, c = img.shape
+                    cx, cy, cz = int(lms.x * w), int(lms.y * h), lms.z
+                    lmlist.append([cx, cy, cz])
+        #print(lmlist)
+        return lmlist
+
 def main():
     previousTime = 0
     currentTime = 0
